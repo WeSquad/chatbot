@@ -32,7 +32,7 @@ Language models generation can be done entirely in Docker but containers have fe
 To install the project, you must at first clone the code repository :
 
 ```sh
-git clone https://XXX.git
+git clone https://github.com/thibaultyou/chatbot.git
 ```
 
 Then, this project can be installed by running the following commands (`sudo` might be needed):
