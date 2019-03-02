@@ -57,6 +57,10 @@ docker-compose up --build
 ## Future improvements
 
 * [ ] Add credentials checking for Botpress
+* [ ] Update Docker files with remote code instead of local
+* [ ] Add commands for deployments
+* [ ] Add example Rasa agent configuration
+* [ ] Add guide for intents creation
 
 ## References
 
