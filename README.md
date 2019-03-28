@@ -9,7 +9,6 @@ Intelligent conversational chatbot with [Articulate admin panel](https://samtecs
 * [Requirements](#requirements)
 * [Installation](#installation)
 * [Usage](#usage)
-* [Future improvements](#future-improvements)
 * [References](#references)
 
 <!-- tocstop -->
