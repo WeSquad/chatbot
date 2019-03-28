@@ -1,9 +1,0 @@
-{
-  "intentsDir": "./generated/intents",
-  "entitiesDir": "./generated/entities",
-  "provider": "rasa",
-  "debugModeEnabled": false,
-  "minimumConfidence": "0.3",
-  "rasaEndpoint": "http://rasa:5000",
-  "rasaProject": "botpress"
-}

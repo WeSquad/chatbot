@@ -9,7 +9,7 @@ WORKDIR /app
 COPY . .
 COPY docker-compose.yml .
 
-EXPOSE 7500 3333 5000 8000 6379 3000
+EXPOSE 7500 3333 5000 8000 6379
 
 # Set runtime default command
 CMD [ "docker-compose", "up" ]
