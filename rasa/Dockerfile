@@ -18,7 +18,7 @@ RUN apk add git bash --update-cache
 
 # Installing Rasa
 RUN wget -O - https://github.com/RasaHQ/rasa_nlu/archive/${RASA_RELEASE}.tar.gz | zcat | tar xvf -
-RUN mv rasa_nlu-${RASA_RELEASE} ${RASA_NLU_HOME}
+RUN mv rasa-${RASA_RELEASE} ${RASA_NLU_HOME}
 
 WORKDIR ${RASA_NLU_HOME}
 
