@@ -25,10 +25,24 @@ services:
       - bot-network
     environment:
       - RASA_LOG_LEVEL='DEBUG'
-  rasa:
+  rasa-fr:
     build: ./rasa
     ports: 
       - 5000:5000
+    depends_on:
+      - rasa-base
+    volumes: 
+      - ${MODEL_DIR:-./local-storage/rasa/nlu-model}:/app/projects
+      - ${RASA_CONFIG:-./local-storage/rasa/rasa-config.yml}:/app/config.yml
+      - ./local-storage/rasa/logs:/app/logs
+    networks: 
+      - bot-network
+    environment:
+      - RASA_LOG_LEVEL='DEBUG'
+  rasa-en:
+    build: ./rasa
+    ports: 
+      - 5001:5000
     depends_on:
       - rasa-base
     volumes: 

@@ -11,13 +11,6 @@ RUN pip install ${RASA_NLU_HOME}/fr.tar.gz
 RUN python -m spacy link fr_model fr
 RUN rm fr.tar.gz
 
-# Installing EN lang package
-COPY ./models/en.tar.gz ${RASA_NLU_HOME}
-RUN pip install ${RASA_NLU_HOME}/en.tar.gz
-RUN python -m spacy link en_model en
-RUN rm en.tar.gz
-
-RUN cp sample_configs/config_spacy_duckling.yml ${RASA_NLU_HOME}/config.yml
 
 # Exposing resources
 EXPOSE 5000
