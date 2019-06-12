@@ -35,5 +35,4 @@ VOLUME ./vectors /app/vectors
 VOLUME ./scripts /app/scripts
 
 
-ENTRYPOINT ["./entrypoint.sh"]
-CMD ["bash"]
+ENTRYPOINT ["sh"]
