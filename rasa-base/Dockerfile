@@ -20,11 +20,26 @@ RUN apk add git bash --update-cache
 RUN wget -O - https://github.com/RasaHQ/rasa_nlu/archive/${RASA_RELEASE}.tar.gz | zcat | tar xvf -
 RUN mv rasa-${RASA_RELEASE} ${RASA_NLU_HOME}
 
-WORKDIR ${RASA_NLU_HOME}
-
-
 # Installing SpaCy deps
 RUN sed -i '/matplotlib/d' alt_requirements/requirements_bare.txt
 RUN sed -i '/numpy/d' alt_requirements/requirements_bare.txt
 RUN pip install -r alt_requirements/requirements_spacy_sklearn.txt
 RUN pip install -e .
+
+WORKDIR ${RASA_NLU_HOME}
+
+COPY conf/config_spacy_duckling.yml ${RASA_NLU_HOME}/config.yml
+
+COPY scripts/install-lang.sh ${RASA_NLU_HOME}/install-lang.sh
+RUN chmod a+x ${RASA_NLU_HOME}/install-lang.sh
+
+VOLUME ./models /app/models
+VOLUME ./vectors /app/vectors
+VOLUME ./scripts /app/scripts
+VOLUME ./conf /app/conf
+
+# Exposing resources
+EXPOSE 5000
+
+ENTRYPOINT ["./entrypoint.sh"]
+CMD ["start", "--path", "/app/nlu-model", "-c", "config.yml", "--max_training_processes", "1"]

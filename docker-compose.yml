@@ -23,50 +23,20 @@ services:
     image: rasa-base:latest
     networks: 
       - bot-network
+    volumes: 
+      - ./local-storage/rasa/nlu-model:/app/models
+      - ./local-storage/rasa/nlu-vector:/app/vectors
+      - ./local-storage/rasa/rasa-config.yml:/app/config.yml
+      - ./local-storage/rasa/logs:/app/logs
     environment:
       - RASA_LOG_LEVEL='DEBUG'
-  rasa:
-    build: ./rasa-fr
-    ports: 
-      - 5000:5000
-    depends_on:
-      - rasa-base
+  rasa-build:
+    build: ./rasa-build
     volumes: 
-      - ${MODEL_DIR:-./local-storage/rasa/nlu-model}:/app/projects
-      - ${RASA_CONFIG:-./local-storage/rasa/rasa-config.yml}:/app/config.yml
-      - ./local-storage/rasa/logs:/app/logs
+      - ./local-storage/rasa/nlu-model:/app/models
+      - ./local-storage/rasa/nlu-vector:/app/vectors
     networks: 
       - bot-network
-    environment:
-      - RASA_LOG_LEVEL='DEBUG'
-  rasa-fr:
-    build: ./rasa-fr
-    ports: 
-      - 5000:5000
-    depends_on:
-      - rasa-base
-    volumes: 
-      - ${MODEL_DIR:-./local-storage/rasa/nlu-model}:/app/projects
-      - ${RASA_CONFIG:-./local-storage/rasa/rasa-config.yml}:/app/config.yml
-      - ./local-storage/rasa/logs:/app/logs
-    networks: 
-      - bot-network
-    environment:
-      - RASA_LOG_LEVEL='DEBUG'
-  rasa-en:
-    build: ./rasa-en
-    ports: 
-      - 5001:5000
-    depends_on:
-      - rasa-base
-    volumes: 
-      - ${MODEL_DIR:-./local-storage/rasa/nlu-model}:/app/projects
-      - ${RASA_CONFIG:-./local-storage/rasa/rasa-config.yml}:/app/config.yml
-      - ./local-storage/rasa/logs:/app/logs
-    networks: 
-      - bot-network
-    environment:
-      - RASA_LOG_LEVEL='DEBUG'
   duckling:
     build: ./duckling
     ports: 
@@ -81,6 +51,6 @@ services:
       - bot-network
     command: redis-server --appendonly yes
     volumes: 
-      - ${REDIS_DATA:-./local-storage/redis-data}:/data
+      - ./local-storage/redis-data:/data
 
 networks: {bot-network: {}}
