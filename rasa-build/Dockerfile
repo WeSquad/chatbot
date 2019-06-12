@@ -23,8 +23,8 @@ COPY scripts/generate-models.sh ${RASA_NLU_HOME}/generate-models.sh
 RUN chmod a+x ${RASA_NLU_HOME}/generate-models.sh
 COPY scripts/load_fastText.py ${RASA_NLU_HOME}/load_fastText.py
 RUN chmod a+x ${RASA_NLU_HOME}/load_fastText.py
-COPY scripts/install.sh ${RASA_NLU_HOME}/install.sh
-RUN chmod a+x ${RASA_NLU_HOME}/install.sh
+COPY scripts/prepare.sh ${RASA_NLU_HOME}/prepare.sh
+RUN chmod a+x ${RASA_NLU_HOME}/prepare.sh
 
 #RUN pip3 install -r ${RASA_NLU_HOME}/requirements.txt
 #RUN pip3 install -e .

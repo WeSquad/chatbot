@@ -19,6 +19,9 @@ echo "current dir: " $DIR
 
 if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
+echo "install rasa requirements.txt"
+pip3 install -r $DIR/rasa/requirements.txt
+
 echo "downloading from en https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz"
 ./download-fasttext-vectors.sh en https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz
 echo "./generate-models.sh fr"

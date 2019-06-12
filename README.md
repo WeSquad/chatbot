@@ -38,9 +38,14 @@ Then, this project can be installed by running the following commands (`sudo` mi
 
 ```sh
 cd chatbot
-chmod +x install.sh
-./install.sh
 docker-compose up --build
+```
+
+wait unitl everything is up and run this :
+
+```sh
+docker exec -it chatbot_rasa-build /app/prepare.sh
+docker exec -it chatbot_rasa-base /app/install.sh
 ```
 
 ## Usage
