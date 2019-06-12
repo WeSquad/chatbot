@@ -20,13 +20,13 @@ RUN apk add git bash --update-cache
 RUN wget -O - https://github.com/RasaHQ/rasa_nlu/archive/${RASA_RELEASE}.tar.gz | zcat | tar xvf -
 RUN mv rasa-${RASA_RELEASE} ${RASA_NLU_HOME}
 
+WORKDIR ${RASA_NLU_HOME}
+
 # Installing SpaCy deps
 RUN sed -i '/matplotlib/d' alt_requirements/requirements_bare.txt
 RUN sed -i '/numpy/d' alt_requirements/requirements_bare.txt
 RUN pip install -r alt_requirements/requirements_spacy_sklearn.txt
 RUN pip install -e .
-
-WORKDIR ${RASA_NLU_HOME}
 
 COPY conf/config_spacy_duckling.yml ${RASA_NLU_HOME}/config.yml
 
