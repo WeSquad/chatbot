@@ -3,7 +3,7 @@ version: '3.0'
 services:
   api:
     build: ./api
-    name: api
+    hostname: api
     ports: 
       - 7500:7500
     networks: 
@@ -13,7 +13,7 @@ services:
      - SWAGGER_BASE_PATH
   articulate:
     build: ./articulate
-    name: articulate
+    hostname: articulate
     ports: 
       - 3333:3333
     networks: 
@@ -21,7 +21,7 @@ services:
     environment:
       - API_URL
   rasa-base:
-    name: rasa-base
+    hostname: rasa-base
     build: ./rasa-base
     image: rasa-base:latest
     networks: 
@@ -34,7 +34,7 @@ services:
     environment:
       - RASA_LOG_LEVEL='DEBUG'
   rasa-build:
-    name: rasa-build
+    hostname: rasa-build
     build: ./rasa-build
     volumes: 
       - ./local-storage/rasa/nlu-model:/app/models
@@ -42,14 +42,14 @@ services:
     networks: 
       - bot-network
   duckling:
-    name: duckling
+    hostname: duckling
     build: ./duckling
     ports: 
       - 8000:8000
     networks: 
       - bot-network
   redis:
-    name: redis
+    hostname: redis
     image: redis:alpine
     ports: 
       - 6379:6379
