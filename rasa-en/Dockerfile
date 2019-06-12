@@ -11,6 +11,8 @@ RUN pip install ${RASA_NLU_HOME}/en.tar.gz
 RUN python -m spacy link en_model en
 RUN rm en.tar.gz
 
+RUN cp config_spacy_duckling.yml ${RASA_NLU_HOME}/config.yml
+
 # Exposing resources
 EXPOSE 5000
 

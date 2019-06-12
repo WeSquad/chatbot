@@ -22,8 +22,6 @@ RUN mv rasa-${RASA_RELEASE} ${RASA_NLU_HOME}
 
 WORKDIR ${RASA_NLU_HOME}
 
-RUN cp config_spacy_duckling.yml ${RASA_NLU_HOME}/config.yml
-
 
 # Installing SpaCy deps
 RUN sed -i '/matplotlib/d' alt_requirements/requirements_bare.txt
