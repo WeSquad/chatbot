@@ -45,7 +45,7 @@ RUN chmod a+x ${RASA_NLU_HOME}/prepare-models.sh
 RUN pip3 install scipy==1.1.0
 RUN pip3 install 'cython>=0.24,<0.28.0'
 RUN pip3 install numpy>=1.15.0
-RUN pip3 install msgpack-numpy<0.4.4.0
+RUN pip3 install msgpack-numpy==0.4.3.2
 RUN pip3 install 'cymem>=1.30,<1.32'
 RUN pip3 install 'preshed>=1.0.0,<2.0.0'
 RUN pip3 install 'thinc>=6.10.3,<6.11.0'
