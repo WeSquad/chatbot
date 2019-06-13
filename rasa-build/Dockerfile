@@ -34,5 +34,3 @@ VOLUME ./models /app/models
 VOLUME ./vectors /app/vectors
 VOLUME ./scripts /app/scripts
 
-
-ENTRYPOINT ["sh"]
