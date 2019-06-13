@@ -44,7 +44,9 @@ docker-compose up --build
 wait unitl everything is up and run this :
 
 ```sh
-docker exec -it chatbot_rasa-build /app/prepare.sh
+docker run -it --rm rasa-build /app/install-requirements.sh
+docker run -it --rm rasa-build /app/prepare-models.sh
+
 docker exec -it chatbot_rasa-base /app/install.sh
 ```
 

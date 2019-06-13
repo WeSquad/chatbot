@@ -29,14 +29,16 @@ RUN apk --no-cache add subversion python3-dev
 WORKDIR ${RASA_NLU_HOME}
 
 COPY scripts/requirements.txt ${RASA_NLU_HOME}/requirements.txt
+COPY scripts/install-requirements.sh ${RASA_NLU_HOME}/install-requirements.sh
+RUN chmod a+x ${RASA_NLU_HOME}/install-requirements.sh
 COPY scripts/download-fasttext-vectors.sh ${RASA_NLU_HOME}/download-fasttext-vectors.sh
 RUN chmod a+x ${RASA_NLU_HOME}/download-fasttext-vectors.sh
 COPY scripts/generate-models.sh ${RASA_NLU_HOME}/generate-models.sh
 RUN chmod a+x ${RASA_NLU_HOME}/generate-models.sh
 COPY scripts/load_fastText.py ${RASA_NLU_HOME}/load_fastText.py
 RUN chmod a+x ${RASA_NLU_HOME}/load_fastText.py
-COPY scripts/prepare.sh ${RASA_NLU_HOME}/prepare.sh
-RUN chmod a+x ${RASA_NLU_HOME}/prepare.sh
+COPY scripts/prepare-models.sh ${RASA_NLU_HOME}/prepare-models.sh
+RUN chmod a+x ${RASA_NLU_HOME}/prepare-models.sh
 
 #RUN pip3 install -r ${RASA_NLU_HOME}/requirements.txt
 #RUN pip3 install -e .

@@ -20,7 +20,7 @@ echo "current dir: " $DIR
 if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
 echo "install rasa requirements.txt"
-pip3 install -r $DIR/requirements.txt
+#pip3 install -r $DIR/requirements.txt
 
 echo "./download-fasttext-vectors.sh -l en -u https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz  -d /app/vectors"
 ./download-fasttext-vectors.sh -l en -u https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz  -d /app/vectors
