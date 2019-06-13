@@ -24,7 +24,7 @@ RUN apk add --no-cache python3 && \
     if [[ ! -e /usr/bin/python ]]; then ln -sf /usr/bin/python3 /usr/bin/python; fi && \
     rm -r /root/.cache
     
-RUN apk --no-cache add subversion
+RUN apk --no-cache add subversion python3-dev
 
 WORKDIR ${RASA_NLU_HOME}
 
