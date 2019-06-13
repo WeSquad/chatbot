@@ -36,6 +36,7 @@ services:
   rasa-build:
     hostname: rasa-build
     build: ./rasa-build
+    image: rasa-build:latest
     volumes: 
       - ./local-storage/rasa/nlu-model:/app/models
       - ./local-storage/rasa/nlu-vector:/app/vectors
