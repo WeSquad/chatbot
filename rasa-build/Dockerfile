@@ -42,7 +42,25 @@ RUN chmod a+x ${RASA_NLU_HOME}/prepare-models.sh
 
 #RUN pip3 install -r ${RASA_NLU_HOME}/requirements.txt
 #RUN pip3 install -e .
-RUN sh ${RASA_NLU_HOME}/install-requirements.sh
+RUN pip3 install scipy==1.1.0
+RUN pip3 install 'cython>=0.24,<0.28.0'
+RUN pip3 install numpy>=1.15.0
+RUN pip3 install msgpack-numpy<0.4.4.0
+RUN pip3 install 'cymem>=1.30,<1.32'
+RUN pip3 install 'preshed>=1.0.0,<2.0.0'
+RUN pip3 install 'thinc>=6.10.3,<6.11.0'
+RUN pip3 install 'murmurhash>=0.28,<0.29'
+RUN pip3 install 'plac<1.0.0,>=0.9.6'
+RUN pip3 install ujson>=1.35
+RUN pip3 install 'dill>=0.2,<0.3'
+RUN pip3 install regex==2018.01.10
+RUN pip3 install 'requests>=2.13.0,<3.0.0'
+RUN pip3 install 'pytest>=3.6.0,<4.0.0'
+RUN pip3 install 'mock>=2.0.0,<3.0.0'
+RUN pip3 install pathlib==1.0.1
+RUN pip3 install spacy==2.0.11
+RUN pip3 install scikit-learn==0.19.1
+RUN pip3 install python_version<3.4
 
 VOLUME ./models /app/models
 VOLUME ./vectors /app/vectors

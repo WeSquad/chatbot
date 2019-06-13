@@ -40,4 +40,4 @@ pip3 install 'mock>=2.0.0,<3.0.0'
 pip3 install pathlib==1.0.1
 pip3 install spacy==2.0.11
 pip3 install scikit-learn==0.19.1
-pip3 install python_version<"3.4"
+pip3 install python_version<3.4
