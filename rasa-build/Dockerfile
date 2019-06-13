@@ -42,7 +42,7 @@ RUN chmod a+x ${RASA_NLU_HOME}/prepare-models.sh
 
 #RUN pip3 install -r ${RASA_NLU_HOME}/requirements.txt
 #RUN pip3 install -e .
-
+RUN sh ${RASA_NLU_HOME}/install-requirements.sh
 
 VOLUME ./models /app/models
 VOLUME ./vectors /app/vectors
