@@ -60,7 +60,7 @@ generate-models() {
 download-generate() {
   lang=$1
 
-  url='https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.$lang.300.vec.gz'
+  url=https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.$lang.300.vec.gz
   mkdir -p /app/vectors/$lang
   download-fasttext-vectors $lang $url /app/vectors/$lang
 
