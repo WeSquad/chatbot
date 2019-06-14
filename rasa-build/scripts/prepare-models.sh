@@ -19,15 +19,37 @@ echo "current dir: " $DIR
 
 if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
-echo "install rasa requirements.txt"
-#pip3 install -r $DIR/requirements.txt
+#############################################
+## Functions
+#############################################
 
-echo "./download-fasttext-vectors.sh -l=en -u='https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz'  -d='/app/vectors'"
-./download-fasttext-vectors.sh -l=en -u='https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz'  -d='/app/vectors'
-echo "./generate-models.sh -l=fr -m='/app/models' -v='/app/vectors'"
-./generate-models.sh -l=fr -m='/app/models' -v='/app/vectors'
+download-fasttext-vectors() {
+    lang=$1
+    url=$2
+    dest_dir=$3
 
-echo "./download-fasttext-vectors.sh -l=fr -u='https://s3-us-west-1.amazonaws.com/fasttext-vectors/word-vectors-v2/cc.fr.300.vec.gz'  -d='/app/vectors'"
-./download-fasttext-vectors.sh -l=fr -u='https://s3-us-west-1.amazonaws.com/fasttext-vectors/word-vectors-v2/cc.fr.300.vec.gz'  -d='/app/vectors'
-echo "./generate-models.sh -l=fr -m='/app/models' -v='/app/vectors'"
-./generate-models.sh -l=fr -m='/app/models' -v='/app/vectors'
+    mkdir -p $dest_dir
+    dest_path=$dest_dir/$lang.vec.gz
+    echo "curl $url -o $dest_path"
+    curl $url -o $dest_path
+    echo "Extracting downloaded vectors ... Please wait !"
+    echo gzip -d $dest_path
+    gzip -d $dest_path
+}
+
+lang=en
+url='https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz'
+mkdir -p /app/vectors/$lang
+download-fasttext-vectors $lang $url /app/vectors/$lang
+
+mkdir -p /app/models/$lang
+./generate-models.sh -l=en -m='/app/models' -v='/app/vectors'
+
+
+lang=fr
+url='https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.fr.300.vec.gz'
+mkdir -p /app/vectors/$lang
+download-fasttext-vectors $lang $url /app/vectors/$lang
+
+mkdir -p /app/models/$lang
+./generate-models.sh -l=en -m='/app/models' -v='/app/vectors'

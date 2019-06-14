@@ -37,7 +37,7 @@ RUN pip3 install 'preshed>=1.0.0,<2.0.0'
 RUN pip3 install 'thinc>=6.10.3,<6.11.0'
 RUN pip3 install 'murmurhash>=0.28,<0.29'
 RUN pip3 install 'plac<1.0.0,>=0.9.6'
-RUN pip3 install ujson>=1.35
+RUN pip3 install ujson>=1.35.1
 RUN pip3 install 'dill>=0.2,<0.3'
 RUN pip3 install regex==2018.01.10
 RUN pip3 install 'requests>=2.13.0,<3.0.0'
@@ -46,6 +46,12 @@ RUN pip3 install 'mock>=2.0.0,<3.0.0'
 RUN pip3 install pathlib==1.0.1
 RUN pip3 install spacy==2.0.11
 RUN pip3 install scikit-learn==0.19.1
+
+RUN pip uninstall ujson
+RUN pip3 uninstall ujson
+RUN git clone git://github.com/esnme/ultrajson.git && cd ultrajson && python3 setup.py install
+
+RUN apk --no-cache add curl
 
 #COPY scripts/requirements.txt ${RASA_NLU_HOME}/requirements.txt
 #RUN pip3 install -r ${RASA_NLU_HOME}/requirements.txt

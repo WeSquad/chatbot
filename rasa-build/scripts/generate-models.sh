@@ -42,9 +42,9 @@ usage() {
 }
 
 install() {
-    lang = $1
-    vectors_path = $2
-    models_path = $3
+    lang=$1
+    vectors_path=$2
+    models_path=$3
 
     echo "Loading FastText vectors "$lang" ... Please wait !"
     python3 $DIR/load_fastText.py $vectors_path/$1/$1.vec $1

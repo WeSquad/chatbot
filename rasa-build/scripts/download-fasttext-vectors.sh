@@ -50,7 +50,7 @@ install() {
     echo "download from $url"
     wget -O $dest/$lang/$lang.vec.gz $url
     echo "Extracting downloaded vectors ... Please wait !"
-    gzip -d $dest/$1/$1.vec.gz
+    gzip -d $dest/$lang/$lang.vec.gz
 }
 
 
