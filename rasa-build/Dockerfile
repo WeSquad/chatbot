@@ -53,17 +53,6 @@ RUN git clone git://github.com/esnme/ultrajson.git && cd ultrajson && python3 se
 
 RUN apk --no-cache add curl
 
-#COPY scripts/requirements.txt ${RASA_NLU_HOME}/requirements.txt
-#RUN pip3 install -r ${RASA_NLU_HOME}/requirements.txt
-#RUN pip3 install -e .
-
-#COPY scripts/install-requirements.sh ${RASA_NLU_HOME}/install-requirements.sh
-#RUN chmod a+x ${RASA_NLU_HOME}/install-requirements.sh
-
-COPY scripts/download-fasttext-vectors.sh ${RASA_NLU_HOME}/download-fasttext-vectors.sh
-RUN chmod a+x ${RASA_NLU_HOME}/download-fasttext-vectors.sh
-COPY scripts/generate-models.sh ${RASA_NLU_HOME}/generate-models.sh
-RUN chmod a+x ${RASA_NLU_HOME}/generate-models.sh
 COPY scripts/load_fastText.py ${RASA_NLU_HOME}/load_fastText.py
 RUN chmod a+x ${RASA_NLU_HOME}/load_fastText.py
 COPY scripts/prepare-models.sh ${RASA_NLU_HOME}/prepare-models.sh

@@ -19,6 +19,8 @@ echo "current dir: " $DIR
 
 if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
+LANG_PACKAGE=en
+
 #############################################
 ## Functions
 #############################################
@@ -37,19 +39,45 @@ download-fasttext-vectors() {
     gzip -d $dest_path
 }
 
-lang=en
-url='https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz'
-mkdir -p /app/vectors/$lang
-download-fasttext-vectors $lang $url /app/vectors/$lang
+generate-models() {
+    lang=$1
+    vectors_path=$2
+    models_path=$3
 
-mkdir -p /app/models/$lang
-./generate-models.sh -l=en -m='/app/models' -v='/app/vectors'
+    echo "Loading FastText vectors "$lang" ... Please wait !"
+    python3 $DIR/load_fastText.py $vectors_path/$1/$1.vec $1
 
+    echo "Generating "$lang" model ... Please wait !"
+    mkdir -p $Dmodels_path/tmp
+    python3 -m spacy package $vectors_path/$lang/ $models_path/tmp
 
-lang=fr
-url='https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.fr.300.vec.gz'
-mkdir -p /app/vectors/$lang
-download-fasttext-vectors $lang $url /app/vectors/$lang
+    cd $models_path/tmp/$lang_model-0.0.0
+    python3 setup.py sdist
+    mv $models_path/tmp/$lang_model-0.0.0/dist/$lang_model-0.0.0.tar.gz $dest/$lang.tar.gz
+    rm -Rf $models_path/tmp/$lang_model-0.0.0/
+}
 
-mkdir -p /app/models/$lang
-./generate-models.sh -l=en -m='/app/models' -v='/app/vectors'
+download-generate() {
+  lang=$1
+
+  url='https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.$lang.300.vec.gz'
+  mkdir -p /app/vectors/$lang
+  download-fasttext-vectors $lang $url /app/vectors/$lang
+
+  mkdir -p /app/models/$lang
+  generate-models $lang '/app/models' '/app/vectors'
+}
+
+#############################################
+## Check arguments
+#############################################
+for i in "$@"
+  do
+    case $i in
+      -l=*|--lang=*)               LANG_PACKAGE="${i#*=}"       ;;
+      -h|--help)                   usage               ;;
+      *)                           usage               ;;
+    esac
+done
+
+download-generate $LANG_PACKAGE
