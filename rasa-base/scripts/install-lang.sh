@@ -19,7 +19,6 @@ echo "current dir: " $DIR
 
 if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
-PACKAGE_PATH=/app/models
 LANG_PACKAGE=en
 
 #############################################
@@ -31,17 +30,15 @@ usage() {
   echo ""
   echo "${blue}Options:                      ${reset}"
   echo "${blue}          -l, --language      FastText language package, default is en${reset}"
-  echo "${blue}          -p, --path          Path to the language package, default is /app/models${reset}"
   echo "${blue}          -h,  --help         help ${reset}"
   echo "${blue}                                   ${reset}"
   exit 1
 }
 
 install() {
-    lang = $1
-    $package_path = $2
-    pip install $package_path/$lang.tar.gz
-    python -m spacy link $lang_model $lang
+    lang=$1
+    pip install /app/models/$lang.tar.gz
+    python -m spacy link $lang"_model" $lang
 }
 
 
@@ -52,11 +49,10 @@ for i in "$@"
   do
     case $i in
       -l=*|--lang=*)       LANG_PACKAGE="${i#*=}"       ;;
-      -p=*|--path=*)       PACKAGE_PATH="${i#*=}"       ;;
       -h|--help)                   usage               ;;
       *)                           usage               ;;
     esac
 done
 
 
-install $LANGUAGE $PACKAGE_PATH 
+install $LANG_PACKAGE

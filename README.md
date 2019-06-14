@@ -28,26 +28,31 @@ In order to run Docker containers the following tools are needed :
 
 Language models generation can be done entirely in Docker but containers have fewer resources than the host machine, Fasttext compression is much faster via Python.
 
-To install the project, you must at first clone the code repository :
+1. To install the project, you must at first clone the code repository :
 
-```sh
+```bash
 git clone https://github.com/WeSquad/chatbot.git
 ```
 
-Then, this project can be installed by running the following commands (`sudo` might be needed):
+2. Then, this project can be installed by running the following commands (`sudo` might be needed):
 
-```sh
+```bash
 cd chatbot
 docker-compose up --build
 ```
 
-wait unitl everything is up and run this :
+Wait unitl everything is up and running.
 
-```sh
-docker run -it --rm rasa-build /app/install-requirements.sh
-docker run -it --rm rasa-build /app/prepare-models.sh
+3. Download and generate models :
 
-docker exec -it chatbot_rasa-base /app/install.sh
+```bash
+docker run -it --rm rasa-build /bin/ash /app/prepare-models.sh -l=en
+```
+
+4. Install languages from models :
+
+```bash
+docker exec -it chatbot_rasa-base /app/install-lang.sh -l=en
 ```
 
 ## Usage
