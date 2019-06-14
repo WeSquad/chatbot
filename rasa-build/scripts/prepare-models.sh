@@ -22,12 +22,12 @@ if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 echo "install rasa requirements.txt"
 #pip3 install -r $DIR/requirements.txt
 
-echo "./download-fasttext-vectors.sh -l en -u https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz  -d /app/vectors"
-./download-fasttext-vectors.sh -l en -u https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz  -d /app/vectors
-echo "./generate-models.sh -l fr -m /app/models -v /app/vectors"
-./generate-models.sh -l fr -m /app/models -v /app/vectors
+echo "./download-fasttext-vectors.sh -l=en -u='https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz'  -d='/app/vectors'"
+./download-fasttext-vectors.sh -l=en -u='https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.en.300.vec.gz'  -d='/app/vectors'
+echo "./generate-models.sh -l=fr -m='/app/models' -v='/app/vectors'"
+./generate-models.sh -l=fr -m='/app/models' -v='/app/vectors'
 
-echo "./download-fasttext-vectors.sh -l fr -u https://s3-us-west-1.amazonaws.com/fasttext-vectors/word-vectors-v2/cc.fr.300.vec.gz  -d /app/vectors"
-./download-fasttext-vectors.sh -l fr -u https://s3-us-west-1.amazonaws.com/fasttext-vectors/word-vectors-v2/cc.fr.300.vec.gz  -d /app/vectors
-echo "./generate-models.sh -l fr -m /app/models -v /app/vectors"
-./generate-models.sh -l fr -m /app/models -v /app/vectors
+echo "./download-fasttext-vectors.sh -l=fr -u='https://s3-us-west-1.amazonaws.com/fasttext-vectors/word-vectors-v2/cc.fr.300.vec.gz'  -d='/app/vectors'"
+./download-fasttext-vectors.sh -l=fr -u='https://s3-us-west-1.amazonaws.com/fasttext-vectors/word-vectors-v2/cc.fr.300.vec.gz'  -d='/app/vectors'
+echo "./generate-models.sh -l=fr -m='/app/models' -v='/app/vectors'"
+./generate-models.sh -l=fr -m='/app/models' -v='/app/vectors'

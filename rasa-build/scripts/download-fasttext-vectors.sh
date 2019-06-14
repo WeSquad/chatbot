@@ -42,11 +42,12 @@ usage() {
 }
 
 install() {
-    lang = $1
-    url = $2
-    dest = $3
+    lang=$1
+    url=$2
+    dest=$3
 
     mkdir -p $dest/$lang
+    echo "download from $url"
     wget -O $dest/$lang/$lang.vec.gz $url
     echo "Extracting downloaded vectors ... Please wait !"
     gzip -d $dest/$1/$1.vec.gz
@@ -68,4 +69,4 @@ for i in "$@"
 done
 
 
-install $LANGUAGE $URL 
+install $LANG_PACKAGE $URL 

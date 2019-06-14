@@ -28,20 +28,6 @@ RUN apk --no-cache add subversion python3-dev
 
 WORKDIR ${RASA_NLU_HOME}
 
-COPY scripts/requirements.txt ${RASA_NLU_HOME}/requirements.txt
-COPY scripts/install-requirements.sh ${RASA_NLU_HOME}/install-requirements.sh
-RUN chmod a+x ${RASA_NLU_HOME}/install-requirements.sh
-COPY scripts/download-fasttext-vectors.sh ${RASA_NLU_HOME}/download-fasttext-vectors.sh
-RUN chmod a+x ${RASA_NLU_HOME}/download-fasttext-vectors.sh
-COPY scripts/generate-models.sh ${RASA_NLU_HOME}/generate-models.sh
-RUN chmod a+x ${RASA_NLU_HOME}/generate-models.sh
-COPY scripts/load_fastText.py ${RASA_NLU_HOME}/load_fastText.py
-RUN chmod a+x ${RASA_NLU_HOME}/load_fastText.py
-COPY scripts/prepare-models.sh ${RASA_NLU_HOME}/prepare-models.sh
-RUN chmod a+x ${RASA_NLU_HOME}/prepare-models.sh
-
-#RUN pip3 install -r ${RASA_NLU_HOME}/requirements.txt
-#RUN pip3 install -e .
 RUN pip3 install scipy==1.1.0
 RUN pip3 install 'cython>=0.24,<0.28.0'
 RUN pip3 install numpy>=1.15.0
@@ -60,6 +46,22 @@ RUN pip3 install 'mock>=2.0.0,<3.0.0'
 RUN pip3 install pathlib==1.0.1
 RUN pip3 install spacy==2.0.11
 RUN pip3 install scikit-learn==0.19.1
+
+#COPY scripts/requirements.txt ${RASA_NLU_HOME}/requirements.txt
+#RUN pip3 install -r ${RASA_NLU_HOME}/requirements.txt
+#RUN pip3 install -e .
+
+#COPY scripts/install-requirements.sh ${RASA_NLU_HOME}/install-requirements.sh
+#RUN chmod a+x ${RASA_NLU_HOME}/install-requirements.sh
+
+COPY scripts/download-fasttext-vectors.sh ${RASA_NLU_HOME}/download-fasttext-vectors.sh
+RUN chmod a+x ${RASA_NLU_HOME}/download-fasttext-vectors.sh
+COPY scripts/generate-models.sh ${RASA_NLU_HOME}/generate-models.sh
+RUN chmod a+x ${RASA_NLU_HOME}/generate-models.sh
+COPY scripts/load_fastText.py ${RASA_NLU_HOME}/load_fastText.py
+RUN chmod a+x ${RASA_NLU_HOME}/load_fastText.py
+COPY scripts/prepare-models.sh ${RASA_NLU_HOME}/prepare-models.sh
+RUN chmod a+x ${RASA_NLU_HOME}/prepare-models.sh
 
 VOLUME ./models /app/models
 VOLUME ./vectors /app/vectors

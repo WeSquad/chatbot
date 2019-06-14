@@ -75,5 +75,5 @@ for i in "$@"
 done
 
 
-install $LANGUAGE $VECTORS_PATH $MODELS_PATH
+install $LANG_PACKAGE $VECTORS_PATH $MODELS_PATH
 
