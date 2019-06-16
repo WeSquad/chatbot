@@ -19,7 +19,7 @@ echo "current dir: " $DIR
 
 if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
-LANG_PACKAGE=en
+LANGUAGE_PACKAGE=en
 
 #############################################
 ## Functions
@@ -29,7 +29,7 @@ usage() {
   echo "Usage: $0 [options]"
   echo ""
   echo "${blue}Options:                      ${reset}"
-  echo "${blue}          -l=en, --language=en      FastText language package, default is en${reset}"
+  echo "${blue}          -l=en, --language-package=en         FastText language package, default is en${reset}"
   echo "${blue}          -h,  --help         help ${reset}"
   echo "${blue}                                   ${reset}"
   exit 1
@@ -48,11 +48,11 @@ install() {
 for i in "$@"
   do
     case $i in
-      -l=*|--lang=*)       LANG_PACKAGE="${i#*=}"       ;;
+      -l=*|--language-package=*)       LANGUAGE_PACKAGE="${i#*=}"       ;;
       -h|--help)                   usage               ;;
       *)                           usage               ;;
     esac
 done
 
 
-install $LANG_PACKAGE
+install $LANGUAGE_PACKAGE

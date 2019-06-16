@@ -19,7 +19,7 @@ echo "current dir: " $DIR
 
 if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
-LANG_PACKAGE=en
+LANGUAGE_PACKAGE=en
 DOWNLAD_VECTORS=true
 GENERATE_MODELS=true
 
@@ -31,7 +31,7 @@ usage() {
   echo "Usage: $0 [options]"
   echo ""
   echo "${blue}Options:                      ${reset}"
-  echo "${blue}          -l=en, --language=en      FastText language package, default is en${reset}"
+  echo "${blue}          -l=en, --language-package=en         FastText language package, default is en${reset}"
   echo "${blue}          -d=true, --download-vectors=true     Download vectors or not, default is true${reset}"
   echo "${blue}          -g=true, --generate-models=true      Generate models or not, default is true${reset}"
   echo "${blue}          -h,  --help         help ${reset}"
@@ -94,7 +94,7 @@ download-generate() {
 for i in "$@"
   do
     case $i in
-      -l=*|--lang=*)               LANG_PACKAGE="${i#*=}"       ;;
+      -l=*|--language-package=*)   LANGUAGE_PACKAGE="${i#*=}"       ;;
       -d=*|--download-vectors=*)   DOWNLAD_VECTORS="${i#*=}"       ;;
       -g=*|--generate-models=*)    GENERATE_MODELS="${i#*=}"       ;;
       -h|--help)                   usage               ;;
@@ -102,4 +102,4 @@ for i in "$@"
     esac
 done
 
-download-generate $LANG_PACKAGE $DOWNLAD_VECTORS $GENERATE_MODELS
+download-generate $LANGUAGE_PACKAGE $DOWNLAD_VECTORS $GENERATE_MODELS
