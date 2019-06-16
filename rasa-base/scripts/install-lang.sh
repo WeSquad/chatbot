@@ -29,7 +29,7 @@ usage() {
   echo "Usage: $0 [options]"
   echo ""
   echo "${blue}Options:                      ${reset}"
-  echo "${blue}          -l, --language      FastText language package, default is en${reset}"
+  echo "${blue}          -l=en, --language=en      FastText language package, default is en${reset}"
   echo "${blue}          -h,  --help         help ${reset}"
   echo "${blue}                                   ${reset}"
   exit 1

@@ -20,10 +20,24 @@ echo "current dir: " $DIR
 if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
 LANG_PACKAGE=en
+DOWNLAD_VECTORS=true
+GENERATE_MODELS=true
 
 #############################################
 ## Functions
 #############################################
+
+usage() {
+  echo "Usage: $0 [options]"
+  echo ""
+  echo "${blue}Options:                      ${reset}"
+  echo "${blue}          -l=en, --language=en      FastText language package, default is en${reset}"
+  echo "${blue}          -d=true, --download-vectors=true     Download vectors or not, default is true${reset}"
+  echo "${blue}          -g=true, --generate-models=true      Generate models or not, default is true${reset}"
+  echo "${blue}          -h,  --help         help ${reset}"
+  echo "${blue}                                   ${reset}"
+  exit 1
+}
 
 download-fasttext-vectors() {
     lang=$1
@@ -59,13 +73,19 @@ generate-models() {
 
 download-generate() {
   lang=$1
+  download=$2
+  generate=$3
 
-  url=https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.$lang.300.vec.gz
-  mkdir -p /app/vectors/$lang
-  download-fasttext-vectors $lang $url /app/vectors/$lang
+  if [ x"$download" == "xtrue" ]; then 
+    url=https://dl.fbaipublicfiles.com/fasttext/vectors-crawl/cc.$lang.300.vec.gz
+    mkdir -p /app/vectors/$lang
+    download-fasttext-vectors $lang $url /app/vectors/$lang
+  fi
 
-  mkdir -p /app/models/$lang
-  generate-models $lang '/app/vectors' '/app/models' 
+  if [ x"$generate" == "xtrue" ]; then 
+    mkdir -p /app/models/$lang
+    generate-models $lang '/app/vectors' '/app/models' 
+  fi
 }
 
 #############################################
@@ -75,9 +95,11 @@ for i in "$@"
   do
     case $i in
       -l=*|--lang=*)               LANG_PACKAGE="${i#*=}"       ;;
+      -d=*|--download-vectors=*)   DOWNLAD_VECTORS="${i#*=}"       ;;
+      -g=*|--generate-models=*)    GENERATE_MODELS="${i#*=}"       ;;
       -h|--help)                   usage               ;;
       *)                           usage               ;;
     esac
 done
 
-download-generate $LANG_PACKAGE
+download-generate $LANG_PACKAGE $DOWNLAD_VECTORS $GENERATE_MODELS
