@@ -42,7 +42,7 @@ services:
       - ./local-storage/rasa/nlu-vector:/app/vectors
     networks: 
       - bot-network
-    command: ./prepare-models.sh --language-package=en --download-vectors=true --generate-models=true 
+    command: ./prepare-models.sh --language-package=fr --download-vectors=true --generate-models=true 
   duckling:
     hostname: duckling
     build: ./duckling

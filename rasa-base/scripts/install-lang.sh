@@ -19,7 +19,7 @@ echo "current dir: " $DIR
 
 if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
-LANGUAGE_PACKAGE=en
+LANGUAGE_PACKAGE=fr
 
 #############################################
 ## Functions
@@ -37,7 +37,9 @@ usage() {
 
 install() {
     lang=$1
+    echo "install the model : pip install /app/models/$lang.tar.gz"
     pip install /app/models/$lang.tar.gz
+    echo "load the model in spacy : python -m spacy link $lang"_model" $lang"
     python -m spacy link $lang"_model" $lang
 }
 

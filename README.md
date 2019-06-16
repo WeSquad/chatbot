@@ -34,25 +34,38 @@ Language models generation can be done entirely in Docker but containers have fe
 git clone https://github.com/WeSquad/chatbot.git
 ```
 
-2. Then, this project can be installed by running the following commands (`sudo` might be needed):
+2. As we are using Docker, we need to first build the docker images required to run the applications :
 
 ```bash
 cd chatbot
-docker-compose up --build
+docker-compose build # this might take up to 1 hour to build
 ```
 
-Wait unitl everything is up and running.
-
-3. Download and generate models :
+As an option, as it's a bit long to build, you may want to build seperatedly :
 
 ```bash
-docker run -it --rm rasa-build /bin/ash /app/prepare-models.sh -l=en
+cd chatbot
+docker-compose build rasa-build # this might take up to 1 hour to build
+docker-compose build rasa-base # this might take up to 15 minutes to build
 ```
+
+The `rasa-build` and `rasa-base` images might take up to 1 hour to build because it installs may rasa dependencies.
+
+3. We can now run the application :
+
+```bash
+cd chatbot
+docker-compose up
+```
+
+Note that the containe `chatbot_rasa-base_1` will automatically launch the following command :
+`/app/prepare-models.sh --language-package=fr`. This might take up to 1 hour, depdending on your machine resources.
 
 4. Install languages from models :
 
 ```bash
-docker exec -it chatbot_rasa-base /app/install-lang.sh -l=en
+cd chatbot
+docker exec -it chatbot_rasa-base_1 ash /app/install-lang.sh --language-package=fr
 ```
 
 ## Usage

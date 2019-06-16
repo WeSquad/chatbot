@@ -19,7 +19,7 @@ echo "current dir: " $DIR
 
 if [ ! -d "$DIR" ]; then DIR="$PWD"; fi
 
-LANGUAGE_PACKAGE=en
+LANGUAGE_PACKAGE=fr
 DOWNLAD_VECTORS=true
 GENERATE_MODELS=true
 
@@ -31,7 +31,7 @@ usage() {
   echo "Usage: $0 [options]"
   echo ""
   echo "${blue}Options:                      ${reset}"
-  echo "${blue}          -l=en, --language-package=en         FastText language package, default is en${reset}"
+  echo "${blue}          -l=en, --language-package=fr         FastText language package, default is en${reset}"
   echo "${blue}          -d=true, --download-vectors=true     Download vectors or not, default is true${reset}"
   echo "${blue}          -g=true, --generate-models=true      Generate models or not, default is true${reset}"
   echo "${blue}          -h,  --help         help ${reset}"
