@@ -61,11 +61,46 @@ host=$(hostname) docker-compose up -d
 Note that the containe `chatbot_rasa_1` will automatically launch the following command :
 `/app/prepare-models.sh --language-package=fr`. This might take up to 1 hour, depdending on your machine resources.
 
+The models is generated when we got this :
+
+```bash
+docker logs -f chatbot_rasa-build_1
+
+...
+
+copying files to en_model-0.0.0...
+copying en_model/meta.json -> en_model-0.0.0/en_model
+copying en_model.egg-info/PKG-INFO -> en_model-0.0.0/en_model.egg-info
+copying en_model.egg-info/SOURCES.txt -> en_model-0.0.0/en_model.egg-info
+copying en_model.egg-info/dependency_links.txt -> en_model-0.0.0/en_model.egg-info
+copying en_model.egg-info/requires.txt -> en_model-0.0.0/en_model.egg-info
+copying en_model.egg-info/top_level.txt -> en_model-0.0.0/en_model.egg-info
+copying en_model/en_model-0.0.0/meta.json -> en_model-0.0.0/en_model/en_model-0.0.0
+Writing en_model-0.0.0/setup.cfg
+Creating tar archive
+removing 'en_model-0.0.0' (and everything under it)
+Moving en model to /app/models/en.tar.gz ... Please wait !
+```
+
 4. Install languages from models :
+
+Before executing the next command, make sure the step 3 is done.
 
 ```bash
 cd chatbot
 docker exec -it chatbot_rasa_1 ash /app/install-lang.sh --language-package=fr
+```
+
+```bash
+docker logs -f chatbot_rasa_1
+
+...
+
+Requirement already satisfied: six<2.0.0,>=1.10.0 in /usr/lib/python2.7/site-packages (from thinc<6.11.0,>=6.10.1->spacy>=>=2.0.11->en-model==0.0.0) (1.11.0)
+Requirement already satisfied: toolz>=0.8.0 in /usr/lib/python2.7/site-packages (from cytoolz<0.10,>=0.9.0->thinc<6.11.0,>=6.10.1->spacy>=>=2.0.11->en-model==0.0.0) (0.9.0)
+Installing collected packages: en-model
+  Running setup.py install for en-model ... done
+Successfully installed en-model-0.0.0
 ```
 
 ## Usage
