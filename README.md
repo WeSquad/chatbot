@@ -55,7 +55,7 @@ The `rasa-build` and `rasa-base` images might take up to 1 hour to build because
 
 ```bash
 cd chatbot
-docker-compose up
+host=$(hostname) docker-compose up -d
 ```
 
 Note that the containe `chatbot_rasa-base_1` will automatically launch the following command :
@@ -70,7 +70,7 @@ docker exec -it chatbot_rasa-base_1 ash /app/install-lang.sh --language-package=
 
 ## Usage
 
-* [Articulate](http://localhost:3333)
+* [Articulate](http://localhost:3000)
 * [Articulate Swagger API](http://localhost:7500/documentation)
 * [Duckling ping](http://localhost:8000)
 * [Rasa NLU ping](http://localhost:5000)

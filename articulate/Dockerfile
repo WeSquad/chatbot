@@ -14,7 +14,7 @@ ADD . .
 # run yarn build when running yarn start:prod
 # RUN yarn build
 
-EXPOSE 3333
+EXPOSE 3000
 
 #CMD ["yarn", "start:prod"]
 CMD ["yarn", "start"]

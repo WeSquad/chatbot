@@ -15,11 +15,11 @@ services:
     build: ./articulate
     hostname: articulate
     ports: 
-      - 3333:3333
+      - 3000:3000
     networks: 
       - bot-network
     environment:
-      - API_URL
+      - API_URL=http://${host}:7500
   rasa-base:
     hostname: rasa-base
     build: ./rasa-base
