@@ -61,14 +61,16 @@ generate-models() {
     echo "Loading FastText vectors "$lang" ... Please wait !"
     python3 $DIR/load_fastText.py $vectors_path/$1/$1.vec $1
 
-    echo "Generating "$lang" model ... Please wait !"
+    echo "Extracting vertors of "$lang" model ... Please wait !"
     mkdir -p $models_path/tmp
     python3 -m spacy package $vectors_path/$lang/ $models_path/tmp
 
     cd $models_path/tmp/$lang"_model-0.0.0"
+    echo "Generating "$lang" model ... Please wait !"
     python3 setup.py sdist
-    mv $models_path/tmp/$lang"_model-0.0.0"/dist/$lang"_model-0.0.0".tar.gz $dest/$lang.tar.gz
-    rm -Rf $models_path/tmp/$lang"_model-0.0.0"/
+    echo "Moving "$lang" model to $models_path/$lang.tar.gz ... Please wait !"
+    mv $models_path/tmp/$lang"_model-0.0.0"/dist/$lang"_model-0.0.0".tar.gz $models_path/$lang.tar.gz
+    #rm -Rf $models_path/tmp/$lang"_model-0.0.0"/
 }
 
 download-generate() {
