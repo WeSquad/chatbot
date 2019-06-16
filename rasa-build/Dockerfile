@@ -47,6 +47,7 @@ RUN pip3 install pathlib==1.0.1
 RUN pip3 install spacy==2.0.11
 RUN pip3 install scikit-learn==0.19.1
 
+# There is a bug relating to usjon : https://github.com/esnme/ultrajson/issues/326
 RUN pip uninstall --yes ujson
 RUN pip3 uninstall --yes ujson
 RUN git clone git://github.com/esnme/ultrajson.git && cd ultrajson && python3 setup.py install

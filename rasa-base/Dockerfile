@@ -28,6 +28,10 @@ RUN sed -i '/numpy/d' alt_requirements/requirements_bare.txt
 RUN pip install -r alt_requirements/requirements_spacy_sklearn.txt
 RUN pip install -e .
 
+# There is a bug relating to usjon : https://github.com/esnme/ultrajson/issues/326
+RUN pip uninstall --yes ujson
+RUN git clone git://github.com/esnme/ultrajson.git && cd ultrajson && python setup.py install
+
 COPY conf/config_spacy_duckling.yml ${RASA_NLU_HOME}/config.yml
 
 COPY scripts/install-lang.sh ${RASA_NLU_HOME}/install-lang.sh
