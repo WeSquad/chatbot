@@ -46,10 +46,10 @@ As an option, as it's a bit long to build, you may want to build seperatedly :
 ```bash
 cd chatbot
 docker-compose build rasa-build # this might take up to 1 hour to build
-docker-compose build rasa-base # this might take up to 15 minutes to build
+docker-compose build rasa # this might take up to 15 minutes to build
 ```
 
-The `rasa-build` and `rasa-base` images might take up to 1 hour to build because it installs may rasa dependencies.
+The `rasa` and `rasa-build` images might take up to 1 hour to build because it installs may rasa dependencies.
 
 3. We can now run the application :
 
@@ -58,14 +58,14 @@ cd chatbot
 host=$(hostname) docker-compose up -d
 ```
 
-Note that the containe `chatbot_rasa-base_1` will automatically launch the following command :
+Note that the containe `chatbot_rasa_1` will automatically launch the following command :
 `/app/prepare-models.sh --language-package=fr`. This might take up to 1 hour, depdending on your machine resources.
 
 4. Install languages from models :
 
 ```bash
 cd chatbot
-docker exec -it chatbot_rasa-base_1 ash /app/install-lang.sh --language-package=fr
+docker exec -it chatbot_rasa_1 ash /app/install-lang.sh --language-package=fr
 ```
 
 ## Usage

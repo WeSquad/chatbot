@@ -20,9 +20,9 @@ services:
       - bot-network
     environment:
       - API_URL=http://${host}:7500
-  rasa-base:
-    hostname: rasa-base
-    build: ./rasa-base
+  rasa:
+    hostname: rasa
+    build: ./rasa
     image: rasa-base:latest
     networks: 
       - bot-network
