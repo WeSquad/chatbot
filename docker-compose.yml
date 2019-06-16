@@ -24,6 +24,8 @@ services:
     hostname: rasa
     build: ./rasa
     image: rasa-base:latest
+    ports: 
+      - 5000:5000
     networks: 
       - bot-network
     volumes: 
