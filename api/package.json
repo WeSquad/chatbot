@@ -51,7 +51,7 @@
     "json2yaml": "^1.1.0",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",
-    "moment-timezone": "^0.5.13",
+    "moment-timezone": "^0.5.35",
     "numeral": "^2.0.6",
     "ordinal": "^1.0.2",
     "redis": "^2.8.0",
